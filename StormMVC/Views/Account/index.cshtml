@@ -1,0 +1,96 @@
+﻿@model BusinessLogicLayer.UserBLL
+
+@{
+    ViewBag.Title = "My Account";
+}
+
+<h2>My Account Info</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.F_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.F_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.L_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.L_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ph_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ph_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.News_sub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.News_sub)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoleID)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
+    @Html.ActionLink("Back to List", "index")
+</p>

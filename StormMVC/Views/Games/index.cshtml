@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BusinessLogicLayer.GameBLL>
+
+@{
+    ViewBag.Title = "Games and Updates";
+}
+
+<h2>All Games and Updates</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GameID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Release_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purchase_Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GameID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Release_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Purchase_Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.GameID  }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GameID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GameID })
+        </td>
+    </tr>
+}
+
+</table>

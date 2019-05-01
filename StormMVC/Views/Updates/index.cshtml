@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BusinessLogicLayer.UpdateBLL>
+
+@{
+    ViewBag.Title = "All Updates";
+}
+
+<h2>All Updates</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expansion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Add_Ons)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expansion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Add_Ons)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UpdateID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UpdateID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UpdateID })
+        </td>
+    </tr>
+}
+
+</table>

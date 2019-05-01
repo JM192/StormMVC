@@ -1,0 +1,50 @@
+﻿@model BusinessLogicLayer.UpdateBLL
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UpdateBLL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expansion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expansion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Add_Ons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Add_Ons)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UpdateID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
