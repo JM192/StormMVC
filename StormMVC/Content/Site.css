@@ -15,6 +15,21 @@
 .dl-horizontal dt {
     white-space: normal;
 }
+jumbotron {
+    background-color: darkgray;
+    padding: 0.5em 0.6em;
+}
+table {
+    max-height: inherit;
+    max-width: inherit;
+
+h2 {
+       color:rgb(0, 144, 255)
+   }
+.div {
+    color:rgb(128, 128, 128)
+}
+}
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -22,12 +37,15 @@ select,
 textarea {
     max-width: 280px;
 }
+.topnav li[html.topnav] {
+    background-color: purple;
+}
 
 .topnav input[type=text] {
     float: right;
     padding: 6px;
     border: none;
     margin-top: 8px;
-    margin-right: 16px;
+    margin-right: 8px;
     font-size: 17px;
 }

@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccessLayer
+{
+    public class ProductDAL
+    {
+    #region direct mapping
+
+        public int ProductID { get; set; }
+        public int CategoryID { get; set; }
+        public int SellerID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal ReservePrice { get; set; }
+        public int WinningOfferID { get; set; }
+        public string Comments { get; set; }
+
+    #endregion direct mapping
+
+
+    #region indirect mapping
+        public string Category { get; set; }
+        public string SellerName { get; set; }
+        public string SellerEmailAddress { get; set; }
+        #endregion indirect mapping
+
+        public override string ToString()
+        {
+            return $"ProductID:{ProductID} CategoryID:{CategoryID} SellerID:{SellerID} Name:{Name} Description:{Description}" +
+                $"ReservePrice:{ReservePrice} WinningOfferID:{WinningOfferID} Comments:{Comments} Category:{Category}" +
+                $"SellerName:{SellerName} SellerEmailAddress:{SellerEmailAddress}";
+        }
+    }
+}

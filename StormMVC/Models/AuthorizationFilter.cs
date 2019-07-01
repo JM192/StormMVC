@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace StormMVC.Models
+﻿namespace StormMVC.Models
 {
+
+    using System.Linq;
+    using System.Web.Mvc;
+
     public class MustBeLoggedInAttribute : AuthorizeAttribute
     {
        public override void OnAuthorization(AuthorizationContext filterContext)
@@ -16,10 +14,10 @@ namespace StormMVC.Models
                  base.OnAuthorization(filterContext);
             }
             else
-            {
+            { 
                  string ReturnURL = filterContext.RequestContext.HttpContext.Request.Path.ToString();
                  filterContext.Controller.TempData.Add("Message",
-                 $"you must be logged into any account to access this resource, you are not currently logged in at all");
+                 $"you must be logged into an account to access this resource, you are not currently logged in at this time");
                  filterContext.Controller.TempData.Add("ReturnURL", ReturnURL);
                  System.Web.Routing.RouteValueDictionary dict = new System.Web.Routing.RouteValueDictionary();
                  dict.Add("Controller","Home");
@@ -51,13 +49,4 @@ namespace StormMVC.Models
             }
         }
     }
-
-    //public class MyController
-    //{
-    //    [MustBeInRole(Roles = "Creator Administrator")] public ActionResult  Create()
-    //    {
-    //        // logic for the create action goes here
-            
-    //    }
-    //}
 }

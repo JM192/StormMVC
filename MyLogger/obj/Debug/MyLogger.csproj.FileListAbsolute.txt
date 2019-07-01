@@ -1,0 +1,6 @@
+C:\Users\Onshore\source\repos\StormMVC\MyLogger\bin\Debug\MyLogger.dll
+C:\Users\Onshore\source\repos\StormMVC\MyLogger\bin\Debug\MyLogger.pdb
+C:\Users\Onshore\source\repos\StormMVC\MyLogger\obj\Debug\MyLogger.csprojAssemblyReference.cache
+C:\Users\Onshore\source\repos\StormMVC\MyLogger\obj\Debug\MyLogger.csproj.CoreCompileInputs.cache
+C:\Users\Onshore\source\repos\StormMVC\MyLogger\obj\Debug\MyLogger.dll
+C:\Users\Onshore\source\repos\StormMVC\MyLogger\obj\Debug\MyLogger.pdb

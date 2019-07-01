@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataAccessLayer
+﻿namespace DataAccessLayer
 {
     public class RolesDAL
     {
         //Defining Role Table Columns
         public int RoleID { get; set; }
-        public string Name { get; set; }
-        public string Role_Type { get; set; }
-        public string Privilege { get; set; }
+        public string Role { get; set; }
+        public string Privileges { get; set; }
 
-        //Converting Role Table Columns to Strings for later Implementation
-        public override string ToString()
-        {
-            return $"RoleID:{RoleID} Name:{Name} Role_Type:{Role_Type} Privilege:{Privilege}";
-        }
+        //Allowing the use of Console.WriteLine() in the testing phase
+        //public override string ToString()
+        //{
+        //    return $"RoleID:{RoleID} Role:{Role} Privileges:{Privileges}";
+        //}
     }
 }

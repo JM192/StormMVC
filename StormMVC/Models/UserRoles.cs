@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-
-namespace StormMVC.Models
+﻿namespace StormMVC.Models
 {
-    
+
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+
     public class SelectedUserRolesModel 
     {
         public UserBLL User { get; set; }
@@ -17,15 +14,15 @@ namespace StormMVC.Models
         {
             Values = new[]
             {
-                new SelectListItem { Value = "Regular User", Text="Regular User" },
-                new SelectListItem { Value = "Power User", Text="Power User"},
+                new SelectListItem { Value = "RegularUser", Text="RegularUser" },
+                new SelectListItem { Value = "PowerUser", Text="PowerUser"},
                 new SelectListItem { Value = "Administrator", Text="Administrator" },
             };
         }
         public string[] SelectedValues { get; set; }
         public void SetSelectedValuesFromUser()
         {
-            SelectedValues = Role.Role_Type.Split(' ');
+            SelectedValues = Role.Role.Split(',');
             
         }
         public void SetRolesFromSelectedValues()
@@ -37,8 +34,6 @@ namespace StormMVC.Models
                 sb.Append(' ');
             }
             sb.Remove(sb.Length - 1, 1);
-            //User.RoleID = sb.ToString();
-
         }
         public IEnumerable<SelectListItem> Values { get; set; }
     }

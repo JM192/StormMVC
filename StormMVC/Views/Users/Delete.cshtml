@@ -3,6 +3,20 @@
 @{
     ViewBag.Title = "Delete User Info";
 }
+<style>
+    h2 {
+        color:rgb(0, 144, 255)
+    }
+    h3 {
+        color:rgb(96, 107, 113)
+    }
+    dt {
+        color:rgb(128, 128, 128)
+    }
+    dd {
+        color:rgb(15, 98, 178)
+    }
+</style>
 
 <h2>Delete User</h2>
 
@@ -19,35 +33,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.F_name)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.F_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.L_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.L_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ph_num)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ph_num)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
@@ -90,6 +80,14 @@
             @Html.DisplayFor(model => model.RoleID)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Privileges)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Privileges)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {
@@ -97,7 +95,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "index")
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

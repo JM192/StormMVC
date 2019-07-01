@@ -1,34 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-using StormMVC.Models;
-
-namespace StormMVC.Controllers
+﻿namespace StormMVC.Controllers
 {
-        
+
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+
     public class OrdersController : Controller
     {
         [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Orders
         public ActionResult Index()
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                List<OrderBLL> items = ctx.GetAllOrders();
-                return View(items);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    List<OrderBLL> items = ctx.GetAllOrders();
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
             }
         }
         [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Orders/Details/5
         public ActionResult Details(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                OrderBLL items = ctx.GetOrder(id);
-                return View(items);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    OrderBLL items = ctx.GetOrder(id);
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
             }
         }
         [Models.MustBeInRole(Roles = "Administrator")]
@@ -46,11 +58,11 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.InsertOrder(order.Order_Num, order.Order_Name, order.Purchase_Date, order.UserID, order.GameID);
-                    return RedirectToAction("index");
+                    ctx.InsertOrder(order.Order_Name, DateTime.Now, order.UserID, order.GameID);
+                    return RedirectToAction("Index");
                 }                    
             }
-            catch (Exception ex)
+            catch (Exception ex) when (Logger.Log(ex))
             {
                 return View("Error", ex);
             }
@@ -59,13 +71,18 @@ namespace StormMVC.Controllers
         // GET: Orders/Edit/5
         public ActionResult Edit(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                OrderBLL order = ctx.GetOrder(id);
-                return View(order);
-
+                using (BLLContext ctx = new BLLContext())
+                {
+                    OrderBLL order = ctx.GetOrder(id);
+                    return View(order);
+                }
             }
-                      
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }                     
         }
         [Models.MustBeInRole(Roles = "Administrator")]
         // POST: Orders/Edit/5
@@ -76,23 +93,31 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.UpdateOrder(order);
-                    return RedirectToAction("index");
+                    order.Order_Num = id;
+                    ctx.JustUpdateOrder(order);
+                    return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
         [Models.MustBeInRole(Roles = "Administrator")]
         // GET: Orders/Delete/5
         public ActionResult Delete(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                OrderBLL order = ctx.GetOrder(id);
-                return View(order);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    OrderBLL order = ctx.GetOrder(id);
+                    return View(order);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
             }
         }
         [Models.MustBeInRole(Roles = "Administrator")]
@@ -105,12 +130,12 @@ namespace StormMVC.Controllers
                 using (BLLContext ctx = new BLLContext())
                 {
                     ctx.DeleteOrder(id);
-                    return RedirectToAction("index");
+                    return RedirectToAction("Index");
                 }                    
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
     }

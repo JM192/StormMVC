@@ -1,14 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-
-namespace StormMVC.Controllers
+﻿namespace StormMVC.Controllers
 {
+    using System;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+
     public class TwoLevelsController : Controller
     {
+
+        string InvalidUser(BLLContext ctx, UserBLL user)
+        {
+            UserBLL test = ctx.ReadSpecificUserByUsername(user.Email);
+            if (test != null)
+            {
+                return $"A user with the entered information {user.Username} already exists";
+            }
+            return null;
+        }
+
         // GET: TwoLevels/Create
         public ActionResult Create()
         {
@@ -17,21 +26,30 @@ namespace StormMVC.Controllers
 
         // POST: TwoLevels/Create
         [HttpPost]
-        public ActionResult Create(Models.TwoLevelsViewModel two)
+        public ActionResult Create(Models.TwoLevelsViewModel two)            
         {
             try
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    int UserID = ctx.InsertUser(two.UserID, two.F_name, two.L_name, two.Address, two.Ph_num, two.Email,
-                        two.Username, two.Password, two.News_sub, two.RoleID);
-                    ctx.InsertOrder(two.Order_Num, two.Order_Name, two.Purchase_Date, two.UserID, two.GameID);
-                    return RedirectToAction("~/Home");
+                    
+
+                    string salt = System.Web.Helpers.Crypto.GenerateSalt(10);
+                    //string VerifyPhrase = System.Web.Helpers.Crypto.GenerateSalt(100);
+                    string hashedpass = System.Web.Helpers.Crypto.HashPassword(salt + two.Password);
+
+                    two.Salt = salt;
+                    two.Hash = hashedpass;
+                    int newUserID = ctx.InsertUser(two.Name, two.Email, two.Username, two.Password, 
+                                                two.News_sub, 1, two.Salt, two.Hash);
+
+                    ctx.InsertPayment(newUserID, two.Name, two.Address, two.Ph_num, two.Card_num,                          two.Security_code);
+                    return Redirect("~/Home");
                 }                    
             }
-            catch (Exception ex)
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View("ERROR",ex);
+                return View("Error", ex);
             }
         }        
     }

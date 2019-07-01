@@ -3,6 +3,20 @@
 @{
     ViewBag.Title = "Order Details";
 }
+<style>
+    h2 {
+        color:rgb(0, 144, 255)
+    }
+    h3 {
+        color:rgb(96, 107, 113)
+    }
+    dt {
+        color:rgb(128, 128, 128)
+    }
+    dd {
+        color:rgb(15, 98, 178)
+    }
+</style>
 
 <h2>Order Details</h2>
 
@@ -33,9 +47,33 @@
             @Html.DisplayFor(model => model.Purchase_Date)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Game_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game_Title)
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Order_Num }) |
-    @Html.ActionLink("Back to List", "index")
+    @Html.ActionLink("Back to List", "Index")
 </p>

@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DataAccessLayer;
+
+namespace BusinessLogicLayer
+{
+    public class ContextBLL : IDisposable
+    {
+        private ContextDAL ctx = new ContextDAL();
+
+        public ContextBLL()
+        {
+            ctx.ConnectionString = @"Data Source=.\sqlexpress;Initial Catalog=AuctionProject;Integrated Security=True";
+        }
+
+        #region Roles
+
+        public int CreateRole(string RoleName)
+        {
+
+        }
+
+        public void DeleteRole(int RoleID)
+        {
+
+        }
+
+        public void JustUpdateRole(int RoleID, string NewRoleName)
+        {
+
+        }
+
+        public int SafeUpdateRole(int RoleID, string OldRoleName, string NewRoleName)
+        {
+            return ctx.SafeUpdateRole(RoleID, OldRoleName, NewRoleName);
+        }
+
+        public RoleBLL FindRoleByID(int RoleID)
+        {
+            RoleBLL rv = null;
+            RoleDAL dal = ctx.FindRoleByID(RoleID);
+            if (dal != null)
+            {
+                rv = new RoleBLL(dal);
+            }
+            return rv;
+        }
+
+        public List<RoleBLL> GetRoles(int skip, int take)
+        {
+            List<RoleBLL> rv = new List<RoleBLL>();
+            List<RoleDAL> dalitems = ctx.GetRoles(skip, take);
+            foreach (RoleDAL dal in dalitems)
+            {
+                rv.Add(new RoleBLL(dal));
+            }
+            return rv;
+        }
+
+        public void Dispose()
+        {
+            ctx.Dispose();
+        }
+
+        #endregion
+
+    }
+}

@@ -28,7 +28,7 @@ namespace StormMVC
             }
             GenericIdentity i = new GenericIdentity(Username, "myCustomType");
 
-            string[] roles = Sessroles.Split(' ');
+            string[] roles = Sessroles.Split(',');
             GenericPrincipal p = new GenericPrincipal(i, roles);
             HttpContext.Current.User = p;
         }

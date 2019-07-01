@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-using StormMVC.Models;
-
-namespace StormMVC.Controllers
+﻿namespace StormMVC.Controllers
 {
-   [Models.MustBeInRole(Roles = "Administrator")]
+
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+
+    
     public class GamesController : Controller
     {
+        [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Games
         public ActionResult Index()
         {
@@ -20,7 +20,7 @@ namespace StormMVC.Controllers
                 return View(items);
             }                
         }
-
+        [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Games/Details/5
         public ActionResult Details(int id)
         {
@@ -30,13 +30,13 @@ namespace StormMVC.Controllers
                 return View(items);
             }
         }
-        
+        [Models.MustBeInRole(Roles = "Administrator")]
         // GET: Games/Create
         public ActionResult Create()
         {
             return View();           
         }
-        
+        [Models.MustBeInRole(Roles = "Administrator")]
         // POST: Games/Create
         [HttpPost]
         public ActionResult Create(GameBLL game)
@@ -45,16 +45,16 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.InsertGame(game.GameID, game.Game_Title, game.Release_Date, game.Purchase_Price);
+                    ctx.InsertGame(game.Game_Title, DateTime.Now, game.Purchase_Price);
                     return RedirectToAction("Index");
                 }                    
             }
-            catch (Exception ex)
+            catch (Exception ex) when (Logger.Log(ex))
             {
                 return View("Error", ex);
             }
         }
-        
+        [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Games/Edit/5
         public ActionResult Edit(int id)
         {
@@ -62,10 +62,9 @@ namespace StormMVC.Controllers
             {
                 GameBLL game = ctx.GetGame(id);
                 return View(game);
-            }
-                              
+            }                              
         }
-        
+        [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // POST: Games/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, GameBLL game)
@@ -74,16 +73,17 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.UpdateGame(game);
+                    game.GameID = id;
+                    ctx.JustUpdateGame(game);
                     return RedirectToAction("Index");
                 }                    
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
-        
+        [Models.MustBeInRole(Roles = "Administrator")]
         // GET: Games/Delete/5
         public ActionResult Delete(int id)
         {
@@ -93,7 +93,7 @@ namespace StormMVC.Controllers
                 return View(game);
             }
         }
-        
+        [Models.MustBeInRole(Roles = "Administrator")]
         // POST: Games/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
@@ -106,9 +106,9 @@ namespace StormMVC.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
     }

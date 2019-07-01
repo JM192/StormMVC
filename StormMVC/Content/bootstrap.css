@@ -12,6 +12,9 @@ html {
 body {
   margin: 0;
 }
+div {
+    color:#777
+}
 article,
 aside,
 details,
@@ -47,7 +50,7 @@ a {
 }
 a:active,
 a:hover {
-  outline: 0;
+  color:purple;
 }
 abbr[title] {
   border-bottom: 1px dotted;

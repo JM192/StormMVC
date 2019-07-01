@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-using StormMVC.Models;
-
-namespace StormMVC.Controllers
+﻿namespace StormMVC.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+
     [Models.MustBeInRole(Roles = "Administrator")]
     public class UsersController : Controller
     {
@@ -13,21 +13,35 @@ namespace StormMVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                List<UserBLL> items = ctx.GetAllUsers();
-                return View(items);
-            }                
+                using (BLLContext ctx = new BLLContext())
+                {
+                    List<UserBLL> items = ctx.GetAllUsers();
+                    return View(items);
+                }   
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }        
         }
         // GET: Users/Details
         [HttpGet]
         public ActionResult Details(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                UserBLL items = ctx.GetUser(id);
-                return View(items);
-            }                
+                using (BLLContext ctx = new BLLContext())
+                {
+                    UserBLL items = ctx.GetUser(id);
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }                          
         }
         // GET: Users/Create
         [HttpGet]
@@ -44,12 +58,12 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.InsertUser(user.UserID, user.F_name, user.L_name, user.Address,
-                        user.Ph_num, user.Email, user.Username, user.Password, user.News_sub, user.RoleID);
-                    return RedirectToAction("index");
+                    ctx.InsertUser(user.Name, user.Email, user.Username, user.Password, 
+                                   user.News_sub, 1, "", "");
+                    return RedirectToAction("Index");
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) when (Logger.Log(ex))
             {
                 return View("Error", ex);
             }
@@ -59,10 +73,17 @@ namespace StormMVC.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                UserBLL user = ctx.GetUser(id);
-                return View(user);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    UserBLL user = ctx.GetUser(id);
+                    return View(user);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);                
             }
         }
 
@@ -74,13 +95,14 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.UpdateUser(user);
-                    return RedirectToAction("index");
+                    user.UserID = id;
+                    ctx.JustUpdateUser(user);
+                    return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
 
@@ -88,12 +110,18 @@ namespace StormMVC.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                UserBLL user = ctx.GetUser(id);
-                return View(user);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    UserBLL user = ctx.GetUser(id);
+                    return View(user);
+                }
             }
-                
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }             
         }
 
         // POST: Users/Delete/5
@@ -105,12 +133,12 @@ namespace StormMVC.Controllers
                 using (BLLContext ctx = new BLLContext())
                 {
                     ctx.DeleteUser(id);
-                    return RedirectToAction("index");
+                    return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
     }

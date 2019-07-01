@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer;
-
-namespace BusinessLogicLayer
+﻿namespace BusinessLogicLayer
 {
+
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using DataAccessLayer;
+
     public class UserBLL
     {
         //Telling the Compiler or "Program" that DataAccessLayer and BusinessLogicLayer Versions of the User Table
@@ -15,46 +12,40 @@ namespace BusinessLogicLayer
         public UserBLL(UsersDAL usersDAL)
         {
             UserID = usersDAL.UserID;
-            F_name = usersDAL.F_name;
-            L_name = usersDAL.L_name;
-            Address = usersDAL.Address;
-            Ph_num = usersDAL.Ph_num;
+            Name = usersDAL.Name;
             Email = usersDAL.Email;
             Username = usersDAL.Username;
             Password = usersDAL.Password;         
             News_sub = usersDAL.News_sub;
             RoleID = usersDAL.RoleID;
+            Salt = usersDAL.Salt;
+            Hash = usersDAL.Hash;
+            Privileges = usersDAL.Privileges;
         }
-        //UserBLL Constructor for Returning the Columns as Values Inside of Itself
+        // Mapping by constructor
+        // UserBLL Constructor for Returning the Columns as Values Inside of Itself
         public UserBLL()
         {
 
         }
         //Defining Columns of the User Table for use in the BusinessLogicLayer side of CRUD
         public int UserID { get; set; }
-        public string F_name { get; set; }
-        public string L_name { get; set; }
-        public string Address { get; set; }
-        public string Ph_num { get; set; }
+        public string Name { get; set; }        
         public string Email { get; set; }
         public string Username { get; set; }
+
         [DataType (DataType.Password)]
         public string Password { get; set; }        
         public string News_sub { get; set; }
         public int RoleID { get; set; }
+        public string Salt { get; set; }
+        public string Hash { get; set; }
+
+        #region Indirect Mapping
+        public string Privileges { get; set; }
+        #endregion Indirect Mapping
 
         //Checking for Invalid User Input 
-        private UserBLL _user;
-        public UserBLL User
-        {
-            get
-            {
-                if (_user == null)
-                {
-                    throw new Exception("You must do something different");
-                }
-                return _user;
-            }
-        }
+ 
     }
 }

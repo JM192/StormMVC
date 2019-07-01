@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-
-namespace StormMVC.Controllers
+﻿namespace StormMVC.Controllers
 {
+
+    using System;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+    using StormMVC.Models;
+    [MustBeInRole(Roles="Administrator,PowerUser")]
     public class CascadingDeleteController : Controller
     {
         // GET: CascadingDelete/Delete/5
@@ -28,9 +28,9 @@ namespace StormMVC.Controllers
                     return RedirectToAction("~/Home");
                 }                
             }
-            catch (Exception ex)
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View("ERROR", ex);
+                return View("Error", ex);
             }
         }
     }

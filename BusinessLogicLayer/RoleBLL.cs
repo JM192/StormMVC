@@ -1,41 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer;
-
-namespace BusinessLogicLayer
+﻿namespace BusinessLogicLayer
 {
+
+    using System;
+    using DataAccessLayer;
+
     public class RoleBLL
     {
         public RoleBLL(RolesDAL rolesDAL)
         {
-            RoleID = rolesDAL.RoleID;
-            Name = rolesDAL.Name;
-            Role_Type = rolesDAL.Role_Type;
-            Privilege = rolesDAL.Privilege;
+            RoleID = rolesDAL.RoleID;            
+            Role = rolesDAL.Role;
+            Privileges = rolesDAL.Privileges;
         }
         public RoleBLL ()
         {
 
         }
-        public int RoleID { get; set; }
-        public string Name { get; set; }
-        public string Role_Type { get; set; }
-        public string Privilege { get; set; }
+        public int RoleID { get; set; }        
+        public string Role { get; set; }
+        public string Privileges { get; set; }
 
-        private RoleBLL _role;
-        public RoleBLL Role
-        {
-            get
-            {
-                if (_role == null)
-                {
-                    throw new Exception("You must do something different");
-                }
-                return _role;
-            }
-        }
+  
     }
 }

@@ -1,0 +1,11 @@
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\bin\Debug\MyLogger.dll
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\bin\Debug\MyLogger.pdb
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\Onshore\source\repos\StormMVC\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb

@@ -128,11 +128,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CascadingDeleteController.cs" />
-    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\TwoLevelsController.cs" />
@@ -157,6 +156,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\Gradient Background.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -203,22 +203,24 @@
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Games\index.cshtml" />
-    <Content Include="Views\Orders\index.cshtml" />
-    <Content Include="Views\Roles\index.cshtml" />
-    <Content Include="Views\Updates\index.cshtml" />
-    <Content Include="Views\Users\index.cshtml" />
+    <Content Include="Views\Games\Index.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Updates\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Orders\Create.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\Unauthorized.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\Register\Index.cshtml" />
-    <Content Include="Views\Register\InvalidUser.cshtml" />
-    <Content Include="Views\Account\index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Sorry.cshtml" />
     <Content Include="Views\TwoLevels\Create.cshtml" />
     <Content Include="Views\CascadingDelete\Delete.cshtml" />
-    <Content Include="Views\Checkout\index.cshtml" />
+    <Content Include="Views\Payments\Index.cshtml" />
+    <Content Include="Views\Payments\Create.cshtml" />
+    <Content Include="Views\Payments\Edit.cshtml" />
+    <Content Include="Views\Payments\Details.cshtml" />
+    <Content Include="Views\Payments\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -244,6 +246,10 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{65a4492d-da79-452c-ac6e-63fddfce7a80}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyLogger\MyLogger.csproj">
+      <Project>{b0d3289e-57ba-44c1-9622-001381857a9e}</Project>
+      <Name>MyLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

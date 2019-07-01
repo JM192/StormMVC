@@ -3,6 +3,15 @@
 @{
     ViewBag.Title = "My Account";
 }
+<style>
+    h2 {
+        color:rgb(0, 148, 255);
+    }
+    dl {
+        color:rgb(128, 128, 128)
+    }
+</style>
+
 
 <h2>My Account Info</h2>
 
@@ -10,43 +19,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.UserID)
+            @Html.HiddenFor(model => model.UserID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserID)
+            @Html.HiddenFor(model => model.UserID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.F_name)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.F_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.L_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.L_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ph_num)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ph_num)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
@@ -82,15 +67,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RoleID)
+            @Html.HiddenFor(model => model.RoleID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RoleID)
+            @Html.HiddenFor(model => model.RoleID)
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Username }) |
+    @Html.ActionLink("Back", "Index")
 </p>

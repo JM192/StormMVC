@@ -7,66 +7,101 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+<style>
+    body {
+        background-image: url('/images/Gradient Background.png');
+        background-repeat: no-repeat;
+        background-size: 150%;
+    }
+
+    p {
+        color: rgb(0, 144, 255);
+    }
+
+    .centerdiv {
+        text-align: center;
+    }
+
+    .centerdiv ul li {
+        display: inline;
+    }
+</style>
+    <div class="navbar navbar-pills">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-wrap=".navbar" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                
                 @Html.ActionLink("StormTech", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>            
-            <div class="topnav">
-                <ul class="nav navbar-nav">
+            <div class="centerdiv">
+                <ul class="centerdiv nav navbar-nav">
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Home", "Index","Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                        <li>@Html.ActionLink("Register", "Index", "Register")</li>
-                        <input type="text" placeholder="Search.." />
+                        <li>@Html.ActionLink("Register", "Create", "TwoLevels")</li>                        
                     }
                     @if (User.IsInRole("RegularUser"))
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>                        
-                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Account")</li>
-                        <li>@Html.ActionLink("Logout", "Index", "Home")</li>
-                        <input type="text" placeholder="Search.." />
                     }
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("Users", "index", "Users")</li>
-                        <li>@Html.ActionLink("Games", "index", "Games")</li>
-                        <li>@Html.ActionLink("Orders", "index", "Orders")</li>
-                        <li>@Html.ActionLink("Updates", "index", "Updates")</li>
-                        <li>@Html.ActionLink("Roles", "index", "Roles")</li>
-                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Account")</li>
-                        <li>@Html.ActionLink("Logout", "Index", "Home")</li>
-                        <input type="text" placeholder="Search.." />
+                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                        <li>@Html.ActionLink("Games", "Index", "Games")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                        <li>@Html.ActionLink("Updates", "Index", "Updates")</li>
+                        <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+                        <li>@Html.ActionLink("Payments", "Index", "Payments")</li>                        
                     }
                     @if (User.IsInRole("PowerUser"))
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Games", "index", "Games")</li>
-                        <li>@Html.ActionLink("Orders", "index", "Orders")</li>
-                        <li>@Html.ActionLink("Updates", "index", "Updates")</li>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>                        
+                        <li>@Html.ActionLink("Games", "Index", "Games")</li>                        
+                        <li>@Html.ActionLink("Updates", "Index", "Updates")</li>                        
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                    }
+                    @if (User.IsInRole("RegularUser"))
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Account")</li>                        
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                         <li>@Html.ActionLink(User.Identity.Name, "Index", "Account")</li>
-                        <li>@Html.ActionLink("Logout", "Index", "Home")</li>
-                        <input type="text" placeholder="Search.." />
+                    }
+                    @if (User.IsInRole("PowerUser"))
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Account")</li>
                     }
                 </ul>
             </div>            
         </div>
     </div>
+    <br />
+    <br />
+    <br />
     <div class="container body-content">
         @RenderBody()
         <hr />

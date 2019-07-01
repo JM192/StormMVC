@@ -1,34 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-using StormMVC.Models;
-
-namespace StormMVC.Controllers
+﻿namespace StormMVC.Controllers
 {
+
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+
     [Models.MustBeInRole(Roles ="Administrator")]
     public class RolesController : Controller
     {
         // GET: Roles
         public ActionResult Index()
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                List<RoleBLL> items = ctx.GetAllRoles();
-                return View(items);
-            }                
+                using (BLLContext ctx = new BLLContext())
+                {
+                    List<RoleBLL> items = ctx.GetAllRoles();
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }              
         }
 
         // GET: Roles/Details/5
         public ActionResult Details(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                RoleBLL items = ctx.GetRole(id);
-                return View(items);
-            }                
+                using (BLLContext ctx = new BLLContext())
+                {
+                    RoleBLL items = ctx.GetRole(id);
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }           
         }
 
         // GET: Roles/Create
@@ -39,17 +52,17 @@ namespace StormMVC.Controllers
 
         // POST: Roles/Create
         [HttpPost]
-        public ActionResult Create(RoleBLL role)
+        public ActionResult Create(string Role, string Privileges)
         {
             try
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.InsertRole(role.RoleID, role.Name, role.Role_Type, role.Privilege);
+                    ctx.InsertRole(Role, Privileges);
                     return RedirectToAction("Index");
                 }                    
             }
-            catch (Exception ex)
+            catch (Exception ex) when (Logger.Log(ex))
             {
                 return View("Error", ex);
             }
@@ -58,38 +71,53 @@ namespace StormMVC.Controllers
         // GET: Roles/Edit/5
         public ActionResult Edit(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                RoleBLL role = ctx.GetRole(id);
-                return View(role);
-            }            
+                using (BLLContext ctx = new BLLContext())
+                {
+                    RoleBLL role = ctx.GetRole(id);
+                    return View(role);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }          
         }
 
         // POST: Roles/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, RoleBLL role)
+        public ActionResult Edit(int id, RoleBLL r)
         {
             try
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.UpdateRole(role);
+                    r.RoleID = id;
+                    ctx.JustUpdateRole(r);
                     return RedirectToAction("Index");
                 }                    
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
 
         // GET: Roles/Delete/5
         public ActionResult Delete(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                RoleBLL items = ctx.GetRole(id);
-                return View(items);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    RoleBLL items = ctx.GetRole(id);
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
             }
         }
 
@@ -105,9 +133,9 @@ namespace StormMVC.Controllers
                     return RedirectToAction("Index");
                 }                    
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
     }

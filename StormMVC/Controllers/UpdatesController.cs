@@ -1,36 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
-using StormMVC.Models;
-
-namespace StormMVC.Controllers
+﻿namespace StormMVC.Controllers
 {
-    
-        
+
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+
     public class UpdatesController : Controller
     {
         [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Updates
         public ActionResult Index()
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                List<UpdateBLL> items = ctx.GetAllUpdates();
-                return View(items);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    List<UpdateBLL> items = ctx.GetAllUpdates();
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
             }
         }
         [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Updates/Details/5
         public ActionResult Details(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                UpdateBLL items = ctx.GetUpdate(id);
-                return View(items);
-            }                
+                using (BLLContext ctx = new BLLContext())
+                {
+                    UpdateBLL items = ctx.GetUpdate(id);
+                    return View(items);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }              
         }
         [Models.MustBeInRole(Roles = "Administrator")]
         // GET: Updates/Create
@@ -47,28 +58,33 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.InsertUpdate(update.UpdateID, update.Patch, update.Expansion, update.Add_Ons, update.GameID);
-                    return RedirectToAction("index");
+                    ctx.InsertUpdate(update.Patch, update.Expansion, update.Add_Ons, update.GameID);
+                    return RedirectToAction("Index");
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) when (Logger.Log(ex))
             {
                 return View("Error", ex);
             }
         }
-        [Models.MustBeInRole(Roles = "Administrator")]
+        [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // GET: Updates/Edit/5
         public ActionResult Edit(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                UpdateBLL items = ctx.GetUpdate(id);
-                return View(items);
+                using (BLLContext ctx = new BLLContext())
+                {
+                    UpdateBLL items = ctx.GetUpdate(id);
+                    return View(items);
+                }
             }
-            
-                              
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }                         
         }
-        [Models.MustBeInRole(Roles = "Administrator")]
+        [Models.MustBeInRole(Roles = "Administrator,PowerUser")]
         // POST: Updates/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, UpdateBLL update)
@@ -77,24 +93,32 @@ namespace StormMVC.Controllers
             {
                 using (BLLContext ctx = new BLLContext())
                 {
-                    ctx.UpdateUpdate(update);
-                    return RedirectToAction("index");
+                    update.UpdateID = id;
+                    ctx.JustUpdateUpdate(update);
+                    return RedirectToAction("Index");
                 }                    
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
         [Models.MustBeInRole(Roles = "Administrator")]
         // GET: Updates/Delete/5
         public ActionResult Delete(int id)
         {
-            using (BLLContext ctx = new BLLContext())
+            try
             {
-                UpdateBLL update = ctx.GetUpdate(id);
-                return View(update);
-            }            
+                using (BLLContext ctx = new BLLContext())
+                {
+                    UpdateBLL update = ctx.GetUpdate(id);
+                    return View(update);
+                }
+            }
+            catch (Exception ex) when (Logger.Log(ex))
+            {
+                return View("Error", ex);
+            }         
         }
         [Models.MustBeInRole(Roles = "Administrator")]
         // POST: Updates/Delete/5
@@ -106,12 +130,12 @@ namespace StormMVC.Controllers
                 using (BLLContext ctx = new BLLContext())
                 {
                     ctx.DeleteUpdate(id);
-                    return RedirectToAction("index");
+                    return RedirectToAction("Index");
                 }                    
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
     }

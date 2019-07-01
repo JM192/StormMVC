@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Remove Game Info";
 }
+<style>
+    dl {
+        color:rgb(128, 128, 128)
+    }
+</style>
+
 
 <h2>Remove Game Information</h2>
 
@@ -44,12 +50,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "index")
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

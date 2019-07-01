@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace StormMVC.Models
+﻿namespace StormMVC.Models
 {
     public class LoginModel
     {

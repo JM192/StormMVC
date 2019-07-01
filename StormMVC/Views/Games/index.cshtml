@@ -4,29 +4,45 @@
     ViewBag.Title = "Games and Updates";
 }
 
-<h2>All Games and Updates</h2>
+<h2>All Games</h2>
+<style>
+    th {
+        color: rgb(0, 148, 255);
+    }
+
+    td {
+        color: rgb(144, 144, 144)
+    }
+
+    h2 {
+        color: rgb(0, 148, 255);
+    }
+</style>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GameID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Game_Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Release_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Purchase_Price)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover table-responsive" style="background-color: rgba(27, 27, 27, 0.85);">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("#")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game_Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Release_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purchase_Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
+<tbody>
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.GameID)
@@ -41,11 +57,12 @@
             @Html.DisplayFor(modelItem => item.Purchase_Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.GameID  }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GameID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GameID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.GameID })
+            @Html.ActionLink("Details", "Details", new { id = item.GameID })
+            @Html.ActionLink("Delete", "Delete", new { id = item.GameID })
         </td>
     </tr>
+</tbody>
 }
 
 </table>

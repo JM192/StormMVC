@@ -5,28 +5,46 @@
 }
 
 <h2>All Updates</h2>
+<style>
+    th {
+        color: rgb(0, 148, 255);
+    }
+
+    td {
+        color: rgb(144, 144, 144)
+    }
+
+    h2 {
+        color: rgb(0, 148, 255);
+    }
+</style>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Patch)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Expansion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Add_Ons)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover table-responsive" style="background-color: rgba(27, 27, 27, 0.85);">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("#")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expansion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Add_Ons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game_Title)
+            </th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
+<tbody>
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.UpdateID)
@@ -41,11 +59,15 @@
             @Html.DisplayFor(modelItem => item.Add_Ons)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UpdateID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UpdateID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UpdateID })
+            @Html.DisplayFor(modelItem => item.Game_Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.UpdateID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UpdateID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.UpdateID })
         </td>
     </tr>
+</tbody>
 }
 
 </table>

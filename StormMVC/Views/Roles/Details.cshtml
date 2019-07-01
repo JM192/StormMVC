@@ -18,32 +18,24 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Role)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Role)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Role_Type)
+            @Html.DisplayNameFor(model => model.Privileges)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Role_Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Privilege)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Privilege)
+            @Html.DisplayFor(model => model.Privileges)
         </dd>
 
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.RoleID }) |
-    @Html.ActionLink("Back to List", "index")
+    @Html.ActionLink("Back to List", "Index")
 </p>

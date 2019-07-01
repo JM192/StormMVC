@@ -3,7 +3,20 @@
 @{
     ViewBag.Title = "Modify Updates";
 }
-
+<style>
+    h2 {
+        color:rgb(0, 144, 255)
+    }
+    h3 {
+        color:rgb(96, 107, 113)
+    }
+    div {
+        color:rgb(128, 128, 128)
+    }
+    dd {
+        color:rgb(15, 98, 178)
+    }
+</style>
 <h2>Modify Available Updates</h2>
 
 
@@ -14,9 +27,9 @@
 <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">        
+    <div class="form-group">
         <div class="col-md-10">
-            @Html.HiddenFor(model => model.UpdateID, new { htmlAttributes = new { @class = "form-control" } })            
+            @Html.HiddenFor(model => model.UpdateID, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
 
@@ -44,24 +57,30 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.GameID, "GameID: ", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group">        
         <div class="col-md-10">
-            @Html.EditorFor(model => model.GameID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GameID, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.GameID, new { htmlAttributes = new { @class = "form-control" } })           
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Game_Title, "Game Title: ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Game_Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Game_Title, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

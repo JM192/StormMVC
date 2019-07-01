@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccessLayer
+{
+    public class CategoryDAL
+    {
+        #region direct mapping
+        public int CategoryID { get; set; }
+        public string _Category { get; set; }
+
+        #endregion direct mapping
+
+        public override string ToString()
+        {
+            return $"CategoryID: {CategoryID} _Category: {_Category}";
+        }
+    }
+}

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BusinessLogicLayer;
+﻿namespace StormMVC.Controllers
+{
+    using System;
+    using System.Web.Mvc;
+    using BusinessLogicLayer;
+    using MyLogger;
+    using DataAccessLayer;
 
-namespace StormMVC.Controllers
-{   
     public class AccountController : Controller
     {
         public ActionResult Logout()
         {
             Session.Remove("AUTHUsername");
             Session.Remove("AUTHRoles");
-            return Redirect("~/home");
+            return Redirect("~/Home");
         }
         // GET: Account
         public ActionResult Index()
@@ -21,7 +20,7 @@ namespace StormMVC.Controllers
             using (BLLContext ctx = new BLLContext())
             {
                 if (!User.Identity.IsAuthenticated) { return View("Sorry"); }
-                string username = User.Identity.Name; 
+                string username = User.Identity.Name;
                 var item = ctx.ReadSpecificUserByUsername(username);
                 return View(item);
             }                
@@ -38,31 +37,32 @@ namespace StormMVC.Controllers
         }
 
         // GET: Account/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             using (BLLContext ctx = new BLLContext())
             {
-                var u =ctx.GetUser(id);
-               // Models.LoginModel l = new Models.LoginModel();
+                string userName = User.Identity.Name;
+                var u = ctx.ReadSpecificUserByUsername(userName);
                 return View(u);
             }                
         }
 
         // POST: Account/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, UserBLL user)
+        public ActionResult Edit(string Username, UserBLL user)
         {
             try
             {
                 using (BLLContext ctx = new BLLContext())
-                {                    
-                    ctx.UpdateUser(user);
-                    return RedirectToAction("index");
+                {
+                    user.Username = Username;
+                    ctx.JustUpdateUser(user);
+                    return RedirectToAction("Index");
                 }                 
             }
-            catch
+            catch (Exception ex) when (Logger.Log(ex))
             {
-                return View();
+                return View("Error", ex);
             }
         }
     }

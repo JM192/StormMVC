@@ -3,11 +3,24 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<style>
+    h2 {
+        color:rgb(0, 144, 255)
+    }
+    h4 {
+        color:rgb(96, 107, 113)
+    }
+    dt {
+        color:rgb(128, 128, 128)
+    }
+    dd {
+        color:rgb(15, 98, 178)
+    }
+</style>
 <h2>Details</h2>
 
 <div>
-    <h4>UpdateBLL</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -40,6 +53,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Add_Ons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Game_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game_Title)
         </dd>
 
     </dl>
